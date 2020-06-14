@@ -43,10 +43,22 @@ public class MainActivity extends AppCompatActivity {
         String sortOrder = null;
         
         ContentResolver resolver = getContentResolver();
-        Cursor cursor = resolver.query( uri, projection, selection, selectionArgs, sortOrder );
+        
+        Cursor cursor = resolver.query( 
+                uri, 
+                projection, 
+                selection, 
+                selectionArgs, 
+                sortOrder 
+        );
+        
         while (cursor.moveToNext()) {
-            String name = cursor.getString( cursor.getColumnIndex( ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME ) );
-            String number = cursor.getString( cursor.getColumnIndex( ContactsContract.CommonDataKinds.Phone.NUMBER ) );
+            String name = cursor.getString( cursor.getColumnIndex( 
+                    ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME ) );
+            
+            String number = cursor.getString( cursor.getColumnIndex( 
+                    ContactsContract.CommonDataKinds.Phone.NUMBER ) );
+            
             contacts.add( name + "\n" + number );
         }
         listView.setAdapter( new ArrayAdapter<>( this, android.R.layout.simple_list_item_1,contacts) );
